@@ -1,0 +1,131 @@
+###TO REGISTER AN USER
+POST http://localhost:4000/user-api/user
+Content-Type: application/json
+
+{
+  "userId":104,
+	"email":"vishnu@westagilelabs.com",
+	"username":"vishnu",
+	"password":"vishnu"
+}
+
+###ROLES MAPPING BY SUPERADMIN
+PUT http://localhost:4000/superUser-api/user/role
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwNCwidXNlclJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNjc4NTI2NjI5LCJleHAiOjE2Nzg1MzY2Mjl9.kZRcT3emkCrOIDkkrnAA-BsoDdFMCpOkggqKBK8LDoM
+Content-Type: application/json
+
+{
+  "userId":104,
+  "role":"superAdmin" 
+}
+
+###USER LOGIN
+POST http://localhost:4000/user-api/user/login
+Content-Type: application/json
+
+{
+    "userId":100,
+	  "password":"ravi"
+}
+
+
+### For Admin Login 
+
+###GET ALL PROJECTS BY CLICKING ON PORTFOLIO DASHBOARD
+GET http://localhost:4000/admin-api/admin/portfolioDashboard
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJHRE8tSEVBRCIsImlhdCI6MTY3ODUyMDg3MiwiZXhwIjoxNjc4NTMwODcyfQ.DEILuIEU_MrqIds6FDxagUbBt04RF3tNyJs0xbOnkb8
+
+###GET SPECIFIC PROJECT DETAILS BY CLICKING ON SPECIFIC PROJECT FROM PORFOLIO DASHBOARD
+GET http://localhost:4000/admin-api/admin/portfolioDashboard/1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywidXNlclJvbGUiOiJhZG1pbiIsImlhdCI6MTY3ODUyMjM0MywiZXhwIjoxNjc4NTMyMzQzfQ.kDaWw1E4Yzl6PUa0oNCqvR1_cfb-6wrdPkY-wdQhys8
+
+###ADMIN CREATE THE PROJECT AND ASSIGN GDO, PROJECTMANAGER AND HRMANAGER TO THE PROJECT
+POST http://localhost:4000/admin-api/admin/project
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywidXNlclJvbGUiOiJhZG1pbiIsImlhdCI6MTY3ODUyMjM0MywiZXhwIjoxNjc4NTMyMzQzfQ.kDaWw1E4Yzl6PUa0oNCqvR1_cfb-6wrdPkY-wdQhys8
+Content-Type: application/json
+
+{
+  "projectId":1,
+  "projectName":"Nike",
+  "client":1000,
+  "gdoId":100,
+  "projectManager":101,
+  "hrManager":102,
+  "clientAccountManager":"nanda",
+  "statusOfProject":"In progress",
+  "startDate":"2023/03/09",
+  "endDate":"2023/12/12",
+  "overAllProjectFitnessIndicator":"Green",
+  "domain":"Fullstack",
+  "typeOfProject":"Development"
+}
+
+
+
+
+### FOR GDO LOGIN
+
+### ASSIGN PROJECT TO AN EXISTING EMPLOYEE BY GDO
+POST http://localhost:4000/gdo-api/gdo/projectTeam
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4NTI5OTQ4LCJleHAiOjE2Nzg1Mzk5NDh9.w4h-HuMF4UbdPNZIQ4Pph8mp2Tiud5qEkuwWZTiEZRM
+Content-Type: application/json
+
+{
+  "empId":200,
+  "projectId":1,
+  "username":"ramesh",
+  "role":"fronend",
+  "startDate":"2023/03/08",
+  "endDate":"",
+  "status":"In Progress",
+  "billingStatus":"billed",
+  "exposedToCustomer":"yes",
+  "allocationType":"permenant" 
+}
+
+###RAISE  RESOURCING REQUEST`
+POST http://localhost:4000/gdo-api/gdo/resourcingRequest
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4NTI5OTQ4LCJleHAiOjE2Nzg1Mzk5NDh9.w4h-HuMF4UbdPNZIQ4Pph8mp2Tiud5qEkuwWZTiEZRM
+Content-Type: application/json
+
+{
+  "gdoId" :100,
+  "projectId":1,
+  "requestDescription":"2 more days needed to complte"
+}
+
+
+###FOR PROJCT MANAGER LOGIN
+
+###PROJECT UPDATES BY PROJECT MANAGER
+POST http://localhost:4000/projectManager-api/projectManager/projectUpdates
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMSwidXNlclJvbGUiOiJwcm9qZWN0TWFuYWdlciIsImlhdCI6MTY3ODUyODM1MiwiZXhwIjoxNjc4NTM4MzUyfQ.uLcGlQmDisuyhWSHxgO5Da2UWtVa9bdumb6rNgwCtSg
+Content-Type: application/json
+
+{
+  "projectId":1,
+  "projectManager":101,
+  "date":"2023/03/19",
+  "projectStatusUpdate":"New feature updated",
+  "scheduleStatus":"Red",
+  "resourcingStatus":"Green",
+  "qualityStatus":"Green",
+  "waitingForClient":"no"
+}
+
+###RAISE PROJECT CONCERN BY PROJECT MANAGER
+POST http://localhost:4000/projectManager-api/projectManager/projectConcern
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMSwidXNlclJvbGUiOiJwcm9qZWN0TWFuYWdlciIsImlhdCI6MTY3ODUyODM1MiwiZXhwIjoxNjc4NTM4MzUyfQ.uLcGlQmDisuyhWSHxgO5Da2UWtVa9bdumb6rNgwCtSg
+Content-Type: application/json
+
+{
+  "projectId":1,
+  "projectManager":101,
+  "concernDescription":"More man power is required to make it fast ",
+  "concernRaisedBy":"bhanu",
+  "onDate":"2023/03/9",
+  "severity":"Critical",
+  "raisedInternallyOrNot":"Yes",
+  "statusOfConcern":"pending",
+  "concernMitigatedOnDate":"2023/03/09"
+}
