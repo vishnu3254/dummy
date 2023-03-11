@@ -88,7 +88,7 @@ const loginUser = expressAsyncHandler(async (req, res) => {
         },
         process.env.SECRET_KEY,
         {
-          expiresIn: 10000,
+          expiresIn: "10d",
         }
       );
       res.send({ message: "Login successfull", payload: signedToken });

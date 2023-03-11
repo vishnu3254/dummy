@@ -25,7 +25,7 @@ adminApp.get(
 );
 
 // create project
-adminApp.post("/admin/project", createProject);
+adminApp.post("/admin/project", verifyAdminToken,createProject);
 
 // export adminApi
 module.exports = adminApp;

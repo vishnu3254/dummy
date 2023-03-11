@@ -23,7 +23,7 @@ const superAdminApp = require("./routes/superAdmin.route");
 const gdoApp = require("./routes/gdo.route");
 
 // import projectManagerApp
-const projectManagerApp = require("./routes/projectManager.route")
+const projectManagerApp = require("./routes/projectManager.route");
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Server is running on ${port}...`));
@@ -35,7 +35,7 @@ sequelize
   .catch((err) => console.log("DB FAILED..."));
 
 // sync the sequelize
-sequelize.sync({ alter: true });
+sequelize.sync({});
 
 // body parser
 app.use(express.json());
@@ -50,13 +50,10 @@ app.use("/admin-api", adminApp);
 app.use("/user-api", userApp);
 
 // path middleware for gdoApp
-app.use("/gdo-api",gdoApp)
+app.use("/gdo-api", gdoApp);
 
 // path middleware for projectManager
-app.use("/projectManager-api",projectManagerApp)
-
-
-
+app.use("/projectManager-api", projectManagerApp);
 
 // invalid path
 app.use("*", (req, res) => {

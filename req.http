@@ -24,8 +24,8 @@ POST http://localhost:4000/user-api/user/login
 Content-Type: application/json
 
 {
-    "userId":100,
-	  "password":"ravi"
+    "userId":103,
+	  "password":"ram"
 }
 
 
@@ -33,20 +33,20 @@ Content-Type: application/json
 
 ###GET ALL PROJECTS BY CLICKING ON PORTFOLIO DASHBOARD
 GET http://localhost:4000/admin-api/admin/portfolioDashboard
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJHRE8tSEVBRCIsImlhdCI6MTY3ODUyMDg3MiwiZXhwIjoxNjc4NTMwODcyfQ.DEILuIEU_MrqIds6FDxagUbBt04RF3tNyJs0xbOnkb8
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywidXNlclJvbGUiOiJhZG1pbiIsImlhdCI6MTY3ODUzMDcxMSwiZXhwIjoxNjc5Mzk0NzExfQ.sPAojMx1m1J8PhPIbf-1MktYQCfUzP_o1PSYOzA9XIE
 
 ###GET SPECIFIC PROJECT DETAILS BY CLICKING ON SPECIFIC PROJECT FROM PORFOLIO DASHBOARD
 GET http://localhost:4000/admin-api/admin/portfolioDashboard/1
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywidXNlclJvbGUiOiJhZG1pbiIsImlhdCI6MTY3ODUyMjM0MywiZXhwIjoxNjc4NTMyMzQzfQ.kDaWw1E4Yzl6PUa0oNCqvR1_cfb-6wrdPkY-wdQhys8
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywidXNlclJvbGUiOiJhZG1pbiIsImlhdCI6MTY3ODUzMDcxMSwiZXhwIjoxNjc5Mzk0NzExfQ.sPAojMx1m1J8PhPIbf-1MktYQCfUzP_o1PSYOzA9XIE
 
 ###ADMIN CREATE THE PROJECT AND ASSIGN GDO, PROJECTMANAGER AND HRMANAGER TO THE PROJECT
 POST http://localhost:4000/admin-api/admin/project
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywidXNlclJvbGUiOiJhZG1pbiIsImlhdCI6MTY3ODUyMjM0MywiZXhwIjoxNjc4NTMyMzQzfQ.kDaWw1E4Yzl6PUa0oNCqvR1_cfb-6wrdPkY-wdQhys8
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywidXNlclJvbGUiOiJhZG1pbiIsImlhdCI6MTY3ODUzMDcxMSwiZXhwIjoxNjc5Mzk0NzExfQ.sPAojMx1m1J8PhPIbf-1MktYQCfUzP_o1PSYOzA9XIE
 Content-Type: application/json
 
 {
-  "projectId":1,
-  "projectName":"Nike",
+  "projectId":2,
+  "projectName":"projectPulse",
   "client":1000,
   "gdoId":100,
   "projectManager":101,
@@ -65,9 +65,18 @@ Content-Type: application/json
 
 ### FOR GDO LOGIN
 
+###GET ALL PROJECTS UNDER GDO MAINTANANCE
+GET http://localhost:4000/gdo-api/100/portfolioDashboard 
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4NTMwNjM0LCJleHAiOjE2NzkzOTQ2MzR9.RzFr2tJbT5DC5wOPOhT1cCuvpMzT1icVIsooaIh2yk8
+
+###GET SPECIFIC PROJECT DETAILS BY CLICKING ON SPECIFIC PROJECT FROM PORFOLIO DASHBOARD
+GET http://localhost:4000/gdo-api/100/portfolioDashboard/1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4NTMwNjM0LCJleHAiOjE2NzkzOTQ2MzR9.RzFr2tJbT5DC5wOPOhT1cCuvpMzT1icVIsooaIh2yk8
+
+
 ### ASSIGN PROJECT TO AN EXISTING EMPLOYEE BY GDO
 POST http://localhost:4000/gdo-api/gdo/projectTeam
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4NTI5OTQ4LCJleHAiOjE2Nzg1Mzk5NDh9.w4h-HuMF4UbdPNZIQ4Pph8mp2Tiud5qEkuwWZTiEZRM
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4NTMwNjM0LCJleHAiOjE2NzkzOTQ2MzR9.RzFr2tJbT5DC5wOPOhT1cCuvpMzT1icVIsooaIh2yk8
 Content-Type: application/json
 
 {
@@ -83,9 +92,9 @@ Content-Type: application/json
   "allocationType":"permenant" 
 }
 
-###RAISE  RESOURCING REQUEST`
+###RAISE  RESOURCING REQUEST BY GDO
 POST http://localhost:4000/gdo-api/gdo/resourcingRequest
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4NTI5OTQ4LCJleHAiOjE2Nzg1Mzk5NDh9.w4h-HuMF4UbdPNZIQ4Pph8mp2Tiud5qEkuwWZTiEZRM
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4NTMwNjM0LCJleHAiOjE2NzkzOTQ2MzR9.RzFr2tJbT5DC5wOPOhT1cCuvpMzT1icVIsooaIh2yk8
 Content-Type: application/json
 
 {
@@ -99,7 +108,7 @@ Content-Type: application/json
 
 ###PROJECT UPDATES BY PROJECT MANAGER
 POST http://localhost:4000/projectManager-api/projectManager/projectUpdates
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMSwidXNlclJvbGUiOiJwcm9qZWN0TWFuYWdlciIsImlhdCI6MTY3ODUyODM1MiwiZXhwIjoxNjc4NTM4MzUyfQ.uLcGlQmDisuyhWSHxgO5Da2UWtVa9bdumb6rNgwCtSg
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMSwidXNlclJvbGUiOiJwcm9qZWN0TWFuYWdlciIsImlhdCI6MTY3ODUzMDY3NCwiZXhwIjoxNjc5Mzk0Njc0fQ.JTB8v0AZ7QytnIMc3y1QNdm-g5ZgSs5A5QDL4v1pgBg
 Content-Type: application/json
 
 {
@@ -115,7 +124,7 @@ Content-Type: application/json
 
 ###RAISE PROJECT CONCERN BY PROJECT MANAGER
 POST http://localhost:4000/projectManager-api/projectManager/projectConcern
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMSwidXNlclJvbGUiOiJwcm9qZWN0TWFuYWdlciIsImlhdCI6MTY3ODUyODM1MiwiZXhwIjoxNjc4NTM4MzUyfQ.uLcGlQmDisuyhWSHxgO5Da2UWtVa9bdumb6rNgwCtSg
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMSwidXNlclJvbGUiOiJwcm9qZWN0TWFuYWdlciIsImlhdCI6MTY3ODUzMDY3NCwiZXhwIjoxNjc5Mzk0Njc0fQ.JTB8v0AZ7QytnIMc3y1QNdm-g5ZgSs5A5QDL4v1pgBg
 Content-Type: application/json
 
 {
@@ -129,3 +138,11 @@ Content-Type: application/json
   "statusOfConcern":"pending",
   "concernMitigatedOnDate":"2023/03/09"
 }
+
+###GET ALL PROJECTS UNDER PROJECTMANAGER MAINTANANCE
+GET http://localhost:4000/projectManager-api/101/portfolioDashboard
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMSwidXNlclJvbGUiOiJwcm9qZWN0TWFuYWdlciIsImlhdCI6MTY3ODUzMDY3NCwiZXhwIjoxNjc5Mzk0Njc0fQ.JTB8v0AZ7QytnIMc3y1QNdm-g5ZgSs5A5QDL4v1pgBg
+
+###GET DETAILED PROJECTS DETAILS UNDER PROJECTMANAGER MAINTANANCE FOR SPECIFIC PROJECT
+GET http://localhost:4000/projectManager-api/projectManager/portfolioDashboard/1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMSwidXNlclJvbGUiOiJwcm9qZWN0TWFuYWdlciIsImlhdCI6MTY3ODUzMDY3NCwiZXhwIjoxNjc5Mzk0Njc0fQ.JTB8v0AZ7QytnIMc3y1QNdm-g5ZgSs5A5QDL4v1pgBg

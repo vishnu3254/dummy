@@ -10,6 +10,9 @@ const { ProjectUpdates } = require("../models/projectUpdates.model");
 // import projectconcerns model
 const { ProjectConcern } = require("../models/projectConcerns.model");
 
+// import TeamComposition model
+const { TeamComposition } = require("../models/teamComposition.model");
+
 // Association between Project and ProjectUpdates (one-to-many)
 Project.ProjectUpdates = Project.hasMany(ProjectUpdates, {
   foreignKey: "projectId",
@@ -34,5 +37,87 @@ const raiseProjectConcern = expressAsyncHandler(async (req, res) => {
   res.send({ message: "Project Concern Raised...." });
 });
 
+// getProjectsForProjectManager
+const getProjectsForProjectManager = expressAsyncHandler(async (req, res) => {
+  // get the projectManagerId from url
+  let projectManagerIdFromUrl = req.params.projectManagerId;
+  // query to find all the projects under his maintanance
+  let projectRecords = await Project.findAll({
+    where: {
+      projectManager: projectManagerIdFromUrl,
+    },
+    attributes: {
+      exclude: [
+        "projectId",
+        "gdoId",
+        "projectManager",
+        "hrManager",
+        "domain",
+        "typeOfProject",
+      ],
+    },
+  });
+  // if theere are no projects for projectManager
+  if (projectRecords.length == 0) {
+    res.send({ message: "Sorry You don't have any  projects" });
+  }
+  // if there are projects
+  else {
+    res.send({
+      message: `All projects for ${projectManagerIdFromUrl}`,
+      payload: projectRecords,
+    });
+  }
+});
+
+//getSpecificProjectDetails
+const getSpecificProjectDetails = expressAsyncHandler(async (req, res) => {
+  // get the projectId from url
+  let projectIdFromUrl = req.params.projectId;
+
+  // query to get the particular projectId and its project updates and project concerns by associations
+  let projectRecord = await Project.findOne({
+    where: {
+      projectId: projectIdFromUrl,
+    },
+
+    include: [
+      {
+        association: Project.ProjectUpdates,
+      },
+
+      {
+        association: Project.ProjectConcern,
+      },
+      {
+        association: Project.TeamComposition,
+      },
+    ],
+  });
+
+  // return project fitness, concern indicator ,Team members get these values from projectRecord
+  let projectFitness = projectRecord.dataValues.overAllProjectFitnessIndicator;
+  // find team size
+  let teamSize = projectRecord.dataValues.employeeProjectDetails.length;
+  // find number of concerns is active
+  let concernIndicator = 0;
+  projectRecord.dataValues.projectConcerns.forEach((concern) => {
+    if (concern.statusOfConcern == "pending") concernIndicator++;
+  });
+  // send response
+  res.send({
+    message: `Project Detaitls for projectId ${projectIdFromUrl}`,
+    projectFitness: projectFitness,
+    teamSize: teamSize,
+    concernIndicator: concernIndicator,
+    payload: projectRecord,
+  });
+});
+
 // exports
-module.exports = { projectUpdate, raiseProjectConcern };
+module.exports = {
+  projectUpdate,
+  raiseProjectConcern,
+  getProjectsForProjectManager,
+  getSpecificProjectDetails,
+};
