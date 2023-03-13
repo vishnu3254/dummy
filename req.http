@@ -3,13 +3,46 @@ POST http://localhost:4000/user-api/user
 Content-Type: application/json
 
 {
-  "userId":104,
-	"email":"vishnu@westagilelabs.com",
+  "userId":107,
+	"email":"vishnuvardhanudagundla7@westagilelabs.com",
 	"username":"vishnu",
 	"password":"vishnu"
 }
 
+###USER LOGIN
+POST http://localhost:4000/user-api/user/login
+Content-Type: application/json
+
+{
+    "userId":107,
+	  "password":"vishnuvardhan"
+}
+
+###FORGOT PASSWORD
+POST http://localhost:4000/user-api/user/forgotPassword
+Content-Type: application/json
+
+{
+  "email":"vishnuvardhanudagundla7@gmail.com"
+}
+
+###RESET PASSWORD
+POST http://localhost:4000/user-api/user/vishnuvardhanudagundla7@gmail.com/resetPassword
+Content-Type: application/json
+
+{
+  "otp":12345,
+  "password":"vishnuvardhan"
+}
+
+
 ###ROLES MAPPING BY SUPERADMIN
+
+###GET ALL USERS
+GET http://localhost:4000/superUser-api
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwNCwidXNlclJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNjc4NTQ0NDEzLCJleHAiOjE2Nzk0MDg0MTN9.TsgQv0JSFZ70cLDHqceY-dYLkd-P-3WRLPjskN2KepU
+
+###
 PUT http://localhost:4000/superUser-api/user/role
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwNCwidXNlclJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNjc4NTQ0NDEzLCJleHAiOjE2Nzk0MDg0MTN9.TsgQv0JSFZ70cLDHqceY-dYLkd-P-3WRLPjskN2KepU
 Content-Type: application/json
@@ -19,14 +52,6 @@ Content-Type: application/json
   "role":"gdoHead" 
 }
 
-###USER LOGIN
-POST http://localhost:4000/user-api/user/login
-Content-Type: application/json
-
-{
-    "userId":104,
-	  "password":"vishnu"
-}
 
 
 ### FOR ADMIN LOGIN 
@@ -89,7 +114,7 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywid
 ### FOR GDO LOGIN
 
 ###GET ALL PROJECTS UNDER GDO MAINTANANCE
-GET http://localhost:4000/gdo-api/106/portfolioDashboard 
+GET http://localhost:4000/gdo-api/100/portfolioDashboard 
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4NTMwNjM0LCJleHAiOjE2NzkzOTQ2MzR9.RzFr2tJbT5DC5wOPOhT1cCuvpMzT1icVIsooaIh2yk8
 
 ###GET SPECIFIC PROJECT DETAILS BY CLICKING ON SPECIFIC PROJECT FROM PORFOLIO DASHBOARD

@@ -2,8 +2,9 @@
 const expressAsyncHandler = require("express-async-handler");
 
 // import user controller
-const {User} = require("../models/user.model")
+const { User } = require("../models/user.model");
 
+//role mapping
 const roleMapping = expressAsyncHandler(async (req, res) => {
   // get the role and userId
   let { userId, role } = req.body;
@@ -12,6 +13,9 @@ const roleMapping = expressAsyncHandler(async (req, res) => {
     where: {
       userId: userId,
     },
+    attributes:{
+      exclude:['password']
+    }
   });
   // if userRecord is empty means no user found
   if (userRecord == undefined) {
@@ -27,9 +31,19 @@ const roleMapping = expressAsyncHandler(async (req, res) => {
         },
       }
     );
-    res.send({ message: `Role is mapped to id ${userId}` });
+    res.send({ data: userRecord, message: `Role is mapped to id ${userId}` });
   }
 });
 
+// get All users
+const getAllUsers = expressAsyncHandler(async (req, res) => {
+  let userRecords = await User.findAll({
+    attributes:{
+      exclude:['password']
+    }
+  });
+  res.send({ message: "All users", payload: userRecords });
+});
+
 // exports
-module.exports = roleMapping;
+module.exports = { roleMapping, getAllUsers };
