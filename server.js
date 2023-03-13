@@ -35,7 +35,7 @@ sequelize
   .catch((err) => console.log("DB FAILED..."));
 
 // sync the sequelize
-sequelize.sync({});
+sequelize.sync();
 
 // body parser
 app.use(express.json());

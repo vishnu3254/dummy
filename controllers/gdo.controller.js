@@ -13,15 +13,7 @@ const { Project } = require("../models/project.model");
 // import ResourcingRequest model
 const { ResourcingRequest } = require("../models/resourcingRequest.model");
 
-// Association between TeamCoposition and Employee(one-many)
-TeamComposition.Employee = TeamComposition.hasMany(Employee, {
-  foreignKey: "projectId",
-});
 
-// Association between project and team composition model (one-to-many)
-Project.TeamComposition = Project.hasMany(TeamComposition, {
-  foreignKey: "projectId",
-});
 
 // Assigning projects
 const assignProject = expressAsyncHandler(async (req, res) => {

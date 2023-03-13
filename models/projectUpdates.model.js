@@ -14,10 +14,10 @@ exports.ProjectUpdates = sequelize.define(
   {
     projectId: {
       type: DataTypes.INTEGER,
-      references: {
-        model: Project,
-        key: "projectId",
-      },
+      // references: {
+      //   model: Project,
+      //   key: "projectId",
+      // },
     },
     projectManager: {
       type: DataTypes.INTEGER,

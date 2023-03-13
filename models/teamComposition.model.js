@@ -24,10 +24,10 @@ exports.TeamComposition = sequelize.define(
     projectId: {
       primaryKey: true,
       type: DataTypes.INTEGER,
-      references: {
-        model: Project,
-        key: "projectId",
-      },
+      // `references: {
+      //   model: Project,
+      //   key: "projectId",
+      // },`
     },
     username: {
       type: DataTypes.STRING,

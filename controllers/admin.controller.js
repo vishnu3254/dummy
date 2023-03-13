@@ -13,25 +13,28 @@ const { ProjectConcern } = require("../models/projectConcerns.model");
 // import Team composition model
 const { TeamComposition } = require("../models/teamComposition.model");
 
-// import User model
-const { User } = require("../models/user.model");
-
 // Association between Project and ProjectUpdates (one-to-many)
 Project.ProjectUpdates = Project.hasMany(ProjectUpdates, {
   foreignKey: "projectId",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
 });
 
 // Association between Project and Project Concern (one-to-many)
 Project.ProjectConcern = Project.hasMany(ProjectConcern, {
   foreignKey: "projectId",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
 });
 
 // Association between project and team composition model (one-to-many)
 Project.TeamComposition = Project.hasMany(TeamComposition, {
   foreignKey: "projectId",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
 });
 
-// create project
+// create project by admin
 const createProject = expressAsyncHandler(async (req, res) => {
   // insert the data from body to project model
   await Project.create(req.body);
@@ -86,7 +89,7 @@ const getSpecificProjectDetails = expressAsyncHandler(async (req, res) => {
       },
     ],
   });
-  
+
   // return project fitness, concern indicator ,Team members get these values from projectRecord
   let projectFitness = projectRecord.dataValues.overAllProjectFitnessIndicator;
   // find team size
@@ -106,5 +109,43 @@ const getSpecificProjectDetails = expressAsyncHandler(async (req, res) => {
   });
 });
 
+// update existing project
+const updateProject = expressAsyncHandler(async (req, res) => {
+  //  query to update
+  let updatedRecord = await Project.update(req.body, {
+    where: {
+      projectId: req.body.projectId,
+    },
+  });
+  // check if project is updated correctly or not
+  if (updatedRecord == 0) {
+    res.send({ message: "Project not updated.." });
+  } else {
+    res.send({ message: "Project Updated.." });
+  }
+});
+
+// Delete project
+const deleteProject = expressAsyncHandler(async (req, res) => {
+  // query to delete the project here i am doing hard delete
+  let deletedRecord = await Project.destroy({
+    where: {
+      projectId: req.params.projectId,
+    },
+  });
+  // if deletedRecord is 0 then project is not deleted
+  if (deleteProject == 0) {
+    res.send({ message: "Unable to delete the project" });
+  } else {
+    res.send({ message: "Project deleted successfully.." });
+  }
+});
+
 // export controllers
-module.exports = { getProjects, getSpecificProjectDetails, createProject };
+module.exports = {
+  getProjects,
+  getSpecificProjectDetails,
+  createProject,
+  updateProject,
+  deleteProject,
+};

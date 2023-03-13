@@ -11,12 +11,12 @@ Content-Type: application/json
 
 ###ROLES MAPPING BY SUPERADMIN
 PUT http://localhost:4000/superUser-api/user/role
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwNCwidXNlclJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNjc4NTI2NjI5LCJleHAiOjE2Nzg1MzY2Mjl9.kZRcT3emkCrOIDkkrnAA-BsoDdFMCpOkggqKBK8LDoM
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwNCwidXNlclJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNjc4NTQ0NDEzLCJleHAiOjE2Nzk0MDg0MTN9.TsgQv0JSFZ70cLDHqceY-dYLkd-P-3WRLPjskN2KepU
 Content-Type: application/json
 
 {
-  "userId":104,
-  "role":"superAdmin" 
+  "userId":106,
+  "role":"gdoHead" 
 }
 
 ###USER LOGIN
@@ -24,12 +24,12 @@ POST http://localhost:4000/user-api/user/login
 Content-Type: application/json
 
 {
-    "userId":103,
-	  "password":"ram"
+    "userId":104,
+	  "password":"vishnu"
 }
 
 
-### For Admin Login 
+### FOR ADMIN LOGIN 
 
 ###GET ALL PROJECTS BY CLICKING ON PORTFOLIO DASHBOARD
 GET http://localhost:4000/admin-api/admin/portfolioDashboard
@@ -45,13 +45,13 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywid
 Content-Type: application/json
 
 {
-  "projectId":2,
-  "projectName":"projectPulse",
-  "client":1000,
+  "projectId":1,
+  "projectName":"APWRIMS",
+  "client":1001,
   "gdoId":100,
   "projectManager":101,
   "hrManager":102,
-  "clientAccountManager":"nanda",
+  "clientAccountManager":"kumar",
   "statusOfProject":"In progress",
   "startDate":"2023/03/09",
   "endDate":"2023/12/12",
@@ -60,13 +60,36 @@ Content-Type: application/json
   "typeOfProject":"Development"
 }
 
+###UPDATE EXISTING PROJECT BY ADMIN
+PUT http://localhost:4000/admin-api/admin/portfolioDashboard/project/1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywidXNlclJvbGUiOiJhZG1pbiIsImlhdCI6MTY3ODUzMDcxMSwiZXhwIjoxNjc5Mzk0NzExfQ.sPAojMx1m1J8PhPIbf-1MktYQCfUzP_o1PSYOzA9XIE
+Content-Type: application/json
 
+{
+  "projectId":2,
+  "projectName":"TNWRIMS",
+  "client":1000,
+  "gdoId":100,
+  "projectManager":101,
+  "hrManager":102,
+  "clientAccountManager":"kumar",
+  "statusOfProject":"In progress",
+  "startDate":"2023/03/09",
+  "endDate":"2023/12/12",
+  "overAllProjectFitnessIndicator":"Red",
+  "domain":"Fullstack",
+  "typeOfProject":"Development" 
+}
+
+###DELETE EXISTING PROJECT BY ADMIN
+DELETE http://localhost:4000/admin-api/admin/portfolioDashboard/project/1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywidXNlclJvbGUiOiJhZG1pbiIsImlhdCI6MTY3ODUzMDcxMSwiZXhwIjoxNjc5Mzk0NzExfQ.sPAojMx1m1J8PhPIbf-1MktYQCfUzP_o1PSYOzA9XIE
 
 
 ### FOR GDO LOGIN
 
 ###GET ALL PROJECTS UNDER GDO MAINTANANCE
-GET http://localhost:4000/gdo-api/100/portfolioDashboard 
+GET http://localhost:4000/gdo-api/106/portfolioDashboard 
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4NTMwNjM0LCJleHAiOjE2NzkzOTQ2MzR9.RzFr2tJbT5DC5wOPOhT1cCuvpMzT1icVIsooaIh2yk8
 
 ###GET SPECIFIC PROJECT DETAILS BY CLICKING ON SPECIFIC PROJECT FROM PORFOLIO DASHBOARD
@@ -80,10 +103,10 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwid
 Content-Type: application/json
 
 {
-  "empId":200,
-  "projectId":1,
-  "username":"ramesh",
-  "role":"fronend",
+  "empId":203,
+  "projectId":2,
+  "username":"pavan",
+  "role":"frontend",
   "startDate":"2023/03/08",
   "endDate":"",
   "status":"In Progress",
@@ -138,7 +161,7 @@ Content-Type: application/json
   "statusOfConcern":"pending",
   "concernMitigatedOnDate":"2023/03/09"
 }
-
+ 
 ###GET ALL PROJECTS UNDER PROJECTMANAGER MAINTANANCE
 GET http://localhost:4000/projectManager-api/101/portfolioDashboard
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMSwidXNlclJvbGUiOiJwcm9qZWN0TWFuYWdlciIsImlhdCI6MTY3ODUzMDY3NCwiZXhwIjoxNjc5Mzk0Njc0fQ.JTB8v0AZ7QytnIMc3y1QNdm-g5ZgSs5A5QDL4v1pgBg

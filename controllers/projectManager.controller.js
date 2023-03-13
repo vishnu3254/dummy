@@ -1,6 +1,12 @@
 // import expressAsyncHandler
 const expressAsyncHandler = require("express-async-handler");
 
+//import nodemailer module
+const nodemailer = require("nodemailer");
+
+// dotenv
+require("dotenv").config();
+
 // import Project Model
 const { Project } = require("../models/project.model");
 
@@ -13,14 +19,15 @@ const { ProjectConcern } = require("../models/projectConcerns.model");
 // import TeamComposition model
 const { TeamComposition } = require("../models/teamComposition.model");
 
-// Association between Project and ProjectUpdates (one-to-many)
-Project.ProjectUpdates = Project.hasMany(ProjectUpdates, {
-  foreignKey: "projectId",
-});
+// For email triggering we use nodemailer module
 
-// Association between Project and Project Concern (one-to-many)
-Project.ProjectConcern = Project.hasMany(ProjectConcern, {
-  foreignKey: "projectId",
+//create connection to smtp
+const transporter = nodemailer.createTransport({
+  service: process.env.EMAIL_SERVICE_PROVIDER,
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASSWORD, // app password
+  },
 });
 
 // projectUpdates updated by projectManager
@@ -34,6 +41,27 @@ const projectUpdate = expressAsyncHandler(async (req, res) => {
 const raiseProjectConcern = expressAsyncHandler(async (req, res) => {
   // insert data into project concern model
   await ProjectConcern.create(req.body);
+
+  //mail options for nodemailer
+  let mailOptions = {
+    from: "vishnuvardhanudagundla7@gmail.com",
+    to: "vv50285@gmail.com",
+    subject: `Project concern is raised for project ${req.body.projectId} by ${req.body.projectManager}`,
+    text: `Hi Admin,
+     A project concern is raised 
+     Concern Description: ${req.body.concernDescription}
+     severity:${req.body.severity} `,
+  };
+
+  // send email
+  //send email
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
   res.send({ message: "Project Concern Raised...." });
 });
 

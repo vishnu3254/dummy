@@ -22,10 +22,14 @@ exports.User = sequelize.define(
       allowNull: false,
       validate: {
         checkEmail(email) {
-          let emailDomain = email.slice(-18);
-          console.log(emailDomain);
-          if (emailDomain != "@westagilelabs.com") {
-            throw new Error("only westagilelabs allowed");
+          //let emailDomain = email.slice(-18);
+          // if (emailDomain != "@westagilelabs.com") {
+          //   throw new Error("mail westagilelabs is only   allowed");
+          // }
+          // split the mail with @
+          let emailDomain = email.split("@")[1];
+          if (emailDomain != "westagilelabs.com") {
+            throw new Error(" mail domain only westagilelabs is allowed");
           }
         },
       },

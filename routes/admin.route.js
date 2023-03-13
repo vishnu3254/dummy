@@ -10,6 +10,8 @@ const {
   getProjects,
   getSpecificProjectDetails,
   createProject,
+  updateProject,
+  deleteProject,
 } = require("../controllers/admin.controller");
 
 // routes for admin after login
@@ -25,7 +27,21 @@ adminApp.get(
 );
 
 // create project
-adminApp.post("/admin/project", verifyAdminToken,createProject);
+adminApp.post("/admin/project", verifyAdminToken, createProject);
+
+// update the existing project by admin
+adminApp.put(
+  "/admin/portfolioDashboard/project/:projectId",
+  verifyAdminToken,
+  updateProject
+);
+
+// delete the existing project by admin
+adminApp.delete(
+  "/admin/portfolioDashboard/project/:projectId",
+  verifyAdminToken,
+  deleteProject
+);
 
 // export adminApi
 module.exports = adminApp;
